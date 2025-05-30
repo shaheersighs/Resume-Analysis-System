@@ -9,9 +9,10 @@ function App() {
 
   const handleJobDescriptionSubmit = async () => {
     try {
-      await axios.post("http://127.0.0.1:5000/upload-job-description", {
-        job_description: jobDescription,
-      });
+-      await axios.post("http://127.0.0.1:5000/upload-job-description", {
++      await axios.post(`${API}/upload-job-description`, {
+         job_description: jobDescription,
+       });
     } catch (error) {
       console.error("Error uploading job description:", error);
     }
@@ -28,11 +29,12 @@ function App() {
     });
 
     try {
-      const response = await axios.post(
-        "http://127.0.0.1:5000/upload-resumes",
-        formData,
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
+       const response = await axios.post(
+-        "http://127.0.0.1:5000/upload-resumes",
++        `${API}/upload-resumes`,
+         formData,
+         { headers: { "Content-Type": "multipart/form-data" } }
+       );
 
       setRankedResumes(response.data);
     } catch (error) {
